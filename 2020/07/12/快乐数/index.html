@@ -7,15 +7,15 @@
   
   <title>快乐数 | Haodadeyu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="编写一个算法来判断一个数 n 是不是快乐数。 「快乐数」定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。如果 可以变为  1，那么这个数就是快乐数。 如果 n 是快乐数就返回 True ；不是，则返回 False 。 示例： 1234567输入：19输出：true解释：12 + 92 &#x3D; 82">
+  <meta name="description" content="编写一个算法来判断一个数 n 是不是快乐数。 「快乐数」定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。如果 可以变为  1，那么这个数就是快乐数。 如果 n 是快乐数就返回 True ；不是，则返回 False 。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="快乐数">
 <meta property="og:url" content="http://yoursite.com/2020/07/12/%E5%BF%AB%E4%B9%90%E6%95%B0/index.html">
 <meta property="og:site_name" content="Haodadeyu">
-<meta property="og:description" content="编写一个算法来判断一个数 n 是不是快乐数。 「快乐数」定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。如果 可以变为  1，那么这个数就是快乐数。 如果 n 是快乐数就返回 True ；不是，则返回 False 。 示例： 1234567输入：19输出：true解释：12 + 92 &#x3D; 82">
+<meta property="og:description" content="编写一个算法来判断一个数 n 是不是快乐数。 「快乐数」定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。如果 可以变为  1，那么这个数就是快乐数。 如果 n 是快乐数就返回 True ；不是，则返回 False 。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-07-12T14:52:57.000Z">
-<meta property="article:modified_time" content="2020-07-12T15:10:07.923Z">
+<meta property="article:modified_time" content="2020-07-12T15:11:51.455Z">
 <meta property="article:author" content="Haodadeyu">
 <meta name="twitter:card" content="summary">
   
@@ -95,6 +95,8 @@
         <p>编写一个算法来判断一个数 n 是不是快乐数。</p>
 <p>「快乐数」定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。如果 可以变为  1，那么这个数就是快乐数。</p>
 <p>如果 n 是快乐数就返回 True ；不是，则返回 False 。</p>
+ <a id="more"></a>
+
 <p>示例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：19</span><br><span class="line">输出：true</span><br><span class="line">解释：</span><br><span class="line">12 + 92 &#x3D; 82</span><br><span class="line">82 + 22 &#x3D; 68</span><br><span class="line">62 + 82 &#x3D; 100</span><br><span class="line">12 + 02 + 02 &#x3D; 1</span><br></pre></td></tr></table></figure>
 <h2 id="解法-一：使用集合"><a href="#解法-一：使用集合" class="headerlink" title="解法 一：使用集合"></a>解法 一：使用集合</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isHappy</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//只要一个数出现两次则不快乐。</span></span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">while</span>(n!=<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> temp=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span>(n&gt;<span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                temp+=((n%<span class="number">10</span>)*(n%<span class="number">10</span>));</span><br><span class="line">                n=n/<span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            n=temp;</span><br><span class="line">            <span class="keyword">if</span>(map.containsKey(n))</span><br><span class="line">            &#123;</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">                map.put(n, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -110,7 +112,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/12/%E5%BF%AB%E4%B9%90%E6%95%B0/" data-id="ckcj7sklr0005douu7w134o4i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/12/%E5%BF%AB%E4%B9%90%E6%95%B0/" data-id="ckcj7utc30005m0uub97s4ka7" class="article-share-link">Share</a>
       
       
     </footer>
