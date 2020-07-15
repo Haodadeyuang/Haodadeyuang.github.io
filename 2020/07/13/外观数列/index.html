@@ -15,7 +15,7 @@
 <meta property="og:description" content="给定一个正整数 n（1 ≤ n ≤ 30），输出外观数列的第 n 项。 注意：整数序列中的每一项将表示为一个字符串。 「外观数列」是一个整数序列，从数字 1 开始，序列中的每一项都是对前一项的描述。前五项如下：  1  11  21  1211  111221      第一项是数字 1 描述前一项，这个数是 1 即 “一个 1 ”，记作 11 描述前一项，这个数是 11 即 “两个 1 ” ，记">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-07-13T15:39:31.000Z">
-<meta property="article:modified_time" content="2020-07-13T15:44:36.744Z">
+<meta property="article:modified_time" content="2020-07-14T06:44:57.063Z">
 <meta property="article:author" content="Haodadeyu">
 <meta name="twitter:card" content="summary">
   
@@ -119,11 +119,12 @@
 
 <h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">countAndSay</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">       </span><br><span class="line"><span class="keyword">if</span>(n==<span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"1"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span><span class="comment">//n&gt;1的情况，开始迭代</span></span><br><span class="line">&#123;</span><br><span class="line">    String sta=<span class="string">"1"</span>;<span class="comment">//最开始的串</span></span><br><span class="line">    String newstr=<span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)<span class="comment">//n等于多少即计算多少次串</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> count =<span class="number">1</span>;<span class="comment">//从1开始计数</span></span><br><span class="line">        newstr=<span class="string">""</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;sta.length();j++)<span class="comment">//根据前一字符串得到新串</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(j==sta.length()-<span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                String s1=String.valueOf(count);</span><br><span class="line">                newstr+=s1;</span><br><span class="line">                newstr+=sta.charAt(j);</span><br><span class="line">                count=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(sta.charAt(j)==sta.charAt(j+<span class="number">1</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                String s1=String.valueOf(count);</span><br><span class="line">                newstr+=s1;</span><br><span class="line">                newstr+=sta.charAt(j);</span><br><span class="line">                count=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        sta=newstr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> newstr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>就是一个不断迭代的过程，每次迭代输入都是上次迭代输出。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/13/%E5%A4%96%E8%A7%82%E6%95%B0%E5%88%97/" data-id="ckclbrsd20005mcuubtq11sbk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/13/%E5%A4%96%E8%A7%82%E6%95%B0%E5%88%97/" data-id="ckcn4nefn0006tcuu3pflh1u1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -188,6 +189,14 @@
       <ul>
         
           <li>
+            <a href="/2020/07/15/%E5%9B%9E%E6%96%87%E6%95%B0/">回文数</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/15/%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/">无重复字符的最长子串</a>
+          </li>
+        
+          <li>
             <a href="/2020/07/13/%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/">盛最多水的容器</a>
           </li>
         
@@ -197,14 +206,6 @@
         
           <li>
             <a href="/2020/07/12/%E5%BF%AB%E4%B9%90%E6%95%B0/">快乐数</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/12/%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/">两数相加</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/11/GC%E6%9C%BA%E5%88%B6/">GC机制</a>
           </li>
         
       </ul>
