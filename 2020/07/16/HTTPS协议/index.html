@@ -7,15 +7,15 @@
   
   <title>HTTPS协议 | Haodadeyu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="HTTPS协议是在HTTP的基础上增加了身份认证跟传输加密的协议，保证了传输过程数据的安全性。其协议实现使用了对称加密+非对称加密+数字证书的综合方法。 对称加密在数据传输中，可以使用某种加密算法将原始数据加密后得到密文，在得到密文后将再将密文使用同一个算法计算一次得到原始数据，这种加密方法即为对称加密。$$加密：f(key,data)&#x3D;X$$$$解密：f(key,X)&#x3D;data$$ 此时在网路上">
+  <meta name="description" content="HTTPS协议是在HTTP的基础上增加了身份认证跟传输加密的协议，保证了传输过程数据的安全性。其协议实现使用了对称加密+非对称加密+数字证书的综合方法。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTPS协议">
 <meta property="og:url" content="http://yoursite.com/2020/07/16/HTTPS%E5%8D%8F%E8%AE%AE/index.html">
 <meta property="og:site_name" content="Haodadeyu">
-<meta property="og:description" content="HTTPS协议是在HTTP的基础上增加了身份认证跟传输加密的协议，保证了传输过程数据的安全性。其协议实现使用了对称加密+非对称加密+数字证书的综合方法。 对称加密在数据传输中，可以使用某种加密算法将原始数据加密后得到密文，在得到密文后将再将密文使用同一个算法计算一次得到原始数据，这种加密方法即为对称加密。$$加密：f(key,data)&#x3D;X$$$$解密：f(key,X)&#x3D;data$$ 此时在网路上">
+<meta property="og:description" content="HTTPS协议是在HTTP的基础上增加了身份认证跟传输加密的协议，保证了传输过程数据的安全性。其协议实现使用了对称加密+非对称加密+数字证书的综合方法。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-07-16T07:16:30.000Z">
-<meta property="article:modified_time" content="2020-07-16T07:42:07.482Z">
+<meta property="article:modified_time" content="2020-07-17T07:27:58.500Z">
 <meta property="article:author" content="Haodadeyu">
 <meta name="twitter:card" content="summary">
   
@@ -93,14 +93,26 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>HTTPS协议是在HTTP的基础上增加了身份认证跟传输加密的协议，保证了传输过程数据的安全性。其协议实现使用了<strong>对称加密</strong>+<strong>非对称加密</strong>+<strong>数字证书</strong>的综合方法。</p>
+<a id="more"></a>
+
 <h2 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h2><p>在数据传输中，可以使用某种加密算法将原始数据加密后得到密文，在得到密文后将再将密文使用同一个算法计算一次得到原始数据，这种加密方法即为对称加密。<br>$$<br>加密：f(key,data)=X<br>$$<br>$$<br>解密：f(key,X)=data<br>$$</p>
-<p>此时在网路上传输的是密文，但这种方法的一个很明显的弊端就是只要被知晓了这个key值，在服务端不可能为每个客户端都分配一个特定的key值，那么任何人都可以得到这个key值，将得到的密文进行解密。</p>
-<h2 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h2><p>在对称加密中，加密跟解密使用的都是同一个key，但是</p>
+<p>此时在网路上传输的是密文，但这种方法的一个很明显的弊端就是只要被知晓了这个key值，那么任何人都可以得到这个key值，将得到的密文进行解密。</p>
+<h2 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h2><p>在对称加密中，加密跟解密使用的都是同一个key，而在非对称加密中，加密跟解密使用的是不同的key，服务端存储了两个key，一个是公钥（pk），一个是私钥（sk），其使用方法有以下两种：</p>
+<p>$$<br>加密：f(pk,data)=X<br>$$</p>
+<p>$$<br>解密：f(sk,X)=data<br>$$<br>或者<br>$$<br>加密：f(sk,data)=Y<br>$$</p>
+<p>$$<br>解密：f(pk,Y)=data<br>$$</p>
+<p>服务端的公钥任何人都可以拿到，而私钥只保存在服务端，当客户端想发送数据的时候，它首先跟服务端获取公钥，在本地进行加密，然后将密文发送到服务端，由服务端使用私钥解密。</p>
+<p>不过这种方法也不是完美的，它虽然保证了从客户端向服务端发送的信息的安全，但是却无法解决从服务端发送到客户端的问题，因为在服务端只能使用私钥进行加密然后客户端才能使用公钥进行解密，而公钥是任何人都可以获取的，这样就跟对称加密的弊端一样。</p>
+<h2 id="HTTPS协议"><a href="#HTTPS协议" class="headerlink" title="HTTPS协议"></a>HTTPS协议</h2><p>既然对称加密跟非对称加密都是不可取的，那么是不是可以将两种方法综合起来呢？我们知道，对称加密的缺点是只有一个key，而非对称加密的缺点是服务端到客户端信息的发送，只要解决了这两个问题，就可以得到一种可靠的传输方法。</p>
+<p>首先在建立通信的时候，客户端先向服务端拿到一个公钥pk，再使用pk加密一个数字<strong>num</strong>，服务端拿到这串数字的密文后，使用私钥sk解密出来这个数字<strong>num</strong>，那么，在接下来的通信中，num只有在客户端跟服务端两个点是可视的，因此，我们便可以把这个num作为对称加密的key，在二者通信时都使用这个num进行加密解密，即使中间的密文被截取了，截取者也无法得到原始数据。</p>
+<p>此时我们得到的这种加密方法已经非常可靠了，不过也并不是无懈可击的，假如现在有个黑客在我们跟服务端一开始建立联系的时候便已经截取了我们发送的请求，然后自己发送了一个假的公钥<strong><em>pk’</em></strong>给我们，我们再使用这个假的公钥<strong><em>pk’</em></strong>对我们要发送的num进行加密，黑客在得到密文后，用自己的私钥解密了我们的密文得到num，再假装成我们用真正的公钥<strong><em>pk</em></strong>对解密出来的num进行加密，与服务端建立起联系，那么我们在这个过程所传送的密文对黑客来说都是可视的，这个中间人在我们这里伪装成服务端，在服务端那里伪装成我们，对我们发送的数据进行解密，再加密发送到服务端，服务端返回的数据也先经过中间人解密和加密才到我们手中，而这整个过程我们跟服务端都以为是在跟对方建立联系。</p>
+<h2 id="CA证书"><a href="#CA证书" class="headerlink" title="CA证书"></a>CA证书</h2><p>为了预防中间人问题，保证客户端拿到的是真正的公钥，HTTPS引入了一个第三方机构CA，CA拥有自己的一套key，这里称作<strong><em>cpk,csk</em></strong>，客户端每次向服务端请求公钥的时候的时候，CA都会将服务端的公钥pk使用<strong><em>csk</em></strong>进行加密，得到一个数字证书<strong><em>license</em></strong>，我们得到这个证书后，再使用<strong><em>cpk</em></strong>将这个证书解密得到服务端的公钥pk。</p>
+<p>这里还有一个问题，客户端在请求CA的公钥cpk时候，也可能被中间人截取，因此我们就干脆将公钥直接写死在操作系统中，由浏览器定期维护。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/16/HTTPS%E5%8D%8F%E8%AE%AE/" data-id="ckcoz3ydg0003l8uu71xdafa8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/16/HTTPS%E5%8D%8F%E8%AE%AE/" data-id="ckcqc4hvr000340uu6qho88il" class="article-share-link">Share</a>
       
       
     </footer>
@@ -108,6 +120,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2020/07/17/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          罗马数字转整数
+        
+      </div>
+    </a>
   
   
     <a href="/2020/07/16/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
@@ -156,6 +177,14 @@
       <ul>
         
           <li>
+            <a href="/2020/07/17/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/">有效的括号</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/17/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/">罗马数字转整数</a>
+          </li>
+        
+          <li>
             <a href="/2020/07/16/HTTPS%E5%8D%8F%E8%AE%AE/">HTTPS协议</a>
           </li>
         
@@ -165,14 +194,6 @@
         
           <li>
             <a href="/2020/07/15/%E5%9B%9E%E6%96%87%E6%95%B0/">回文数</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/15/%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/">无重复字符的最长子串</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/13/%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/">盛最多水的容器</a>
           </li>
         
       </ul>
