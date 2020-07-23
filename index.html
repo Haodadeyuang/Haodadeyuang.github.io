@@ -64,6 +64,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-JVM指令与工具" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/" class="article-date">
+  <time datetime="2020-07-23T15:26:32.000Z" itemprop="datePublished">2020-07-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/">JVM指令与工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h2><p>用于显示当前机器中运行的JAVA程序的进程号。</p>
+<h2 id="jconsole"><a href="#jconsole" class="headerlink" title="jconsole"></a>jconsole</h2><p>随JDK安装的可视化调优工具，详细信息包括内存使用情况、正在运行的线程和已装入类。该数据将帮助监控应用程序和 JVM 的行为。该信息有助于了解性能问题、内存使用问题、挂起或死锁。</p>
+<h2 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a>jstat</h2><p><img src="/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/%E5%9B%BE%E7%89%871.png" alt="图片1"></p>
+<h2 id="jstack"><a href="#jstack" class="headerlink" title="jstack"></a>jstack</h2><p>查看线程，分析死锁。</p>
+<h2 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a>jmap</h2><p>查看内存，dump并导出</p>
+<h2 id="visualvm"><a href="#visualvm" class="headerlink" title="visualvm"></a>visualvm</h2><p>可视化工具，可以分析jmap dump的内容，在linux环境中一般没有GUI界面，因此可以用jmap将内存信息dump下来然后在其它平台下使用visualvm分析。<br>旧版本JDK中继承了该工具，新版本（1.8后）中已经移除，需要另行下载。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/" data-id="ckcyzookb0004bouu479ra95j" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-java学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/07/20/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
@@ -91,7 +137,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>刚转Java，为面试作下准备</p>
-<h2 id="Java基础"><a href="#Java基础" class="headerlink" title="## Java基础"></a>## Java基础</h2><p><strong>1.JDK 和 JRE 有什么区别？</strong></p>
+<h2 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h2><p><strong>1.JDK 和 JRE 有什么区别？</strong></p>
 <p>JDK是开发包，包含了JRE，JRE又包含了JVM</p>
 <p>JRE是运行环境，JVM是JAVA虚拟机。</p>
 <p><strong>2.== 和 equals 的区别是什么？</strong></p>
@@ -145,11 +191,14 @@
 <p><strong>13.抽象类能使用 final 修饰吗？</strong></p>
 <p>不能，因为它必须被继承实现。</p>
 <p><strong>14.接口和抽象类有什么区别？</strong></p>
+<p>抽象类可以实现方法，而接口只能包含方法签名。</p>
+<p>接口是更抽象的抽象类，不含任何字段。</p>
+<p>接口可以有default方法，可以被重写，但并不是必须的。</p>
 <p><strong>15.java 中 IO 流分为几种？</strong></p>
+<p>输出流、输入流</p>
 <p><strong>16.BIO、NIO、AIO 有什么区别？</strong></p>
 <p><strong>17.Files的常用方法都有哪些？</strong></p>
-<p>二、容器</p>
-<p>18.java 容器都有哪些？</p>
+<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><p>18.java 容器都有哪些？</p>
 <p>19.Collection 和 Collections 有什么区别？</p>
 <p>20.List、Set、Map 之间的区别是什么？</p>
 <p>21.HashMap 和 Hashtable 有什么区别？</p>
@@ -361,7 +410,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/20/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="ckcw4h6ue0000osuu8kn97nnl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/20/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="ckcyzookg0007bouu8oyn9g4m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -412,7 +461,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/18/%E5%AE%9E%E7%8E%B0strStr/" data-id="ckcw4h6vq000cosuucbiv2fxt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/18/%E5%AE%9E%E7%8E%B0strStr/" data-id="ckcyzooko000gbouu65j07gh3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -473,7 +522,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/18/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/" data-id="ckcw4h6vz000iosuua9qgc7ch" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/18/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/" data-id="ckcyzool1000ubouu3g90986m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -520,7 +569,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/18/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8/" data-id="ckcw4h6vm0009osuu7tfrcxu9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/18/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8/" data-id="ckcyzookh0008bouu4lk8ba8g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -573,7 +622,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/17/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" data-id="ckcw4h6w6000mosuu97gv6rxk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/17/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" data-id="ckcyzooky000pbouu0axs5glz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -623,7 +672,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/17/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/" data-id="ckcw4h6wb000uosuuda4teolb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/17/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/" data-id="ckcyzookz000rbouucmnpeuw8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -668,7 +717,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/16/HTTPS%E5%8D%8F%E8%AE%AE/" data-id="ckcw4h6uz0002osuu6jfq7c04" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/16/HTTPS%E5%8D%8F%E8%AE%AE/" data-id="ckcyzook50001bouugnhv7814" class="article-share-link">Share</a>
       
       
     </footer>
@@ -714,7 +763,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/16/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/" data-id="ckcw4h6w9000rosuugjrhafh6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/16/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/" data-id="ckcyzool2000wbouuf4s44hb3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -763,56 +812,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/15/%E5%9B%9E%E6%96%87%E6%95%B0/" data-id="ckcw4h6vb0005osuufdvy77qh" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-无重复字符的最长子串" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/07/15/%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" class="article-date">
-  <time datetime="2020-07-15T08:32:20.000Z" itemprop="datePublished">2020-07-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/15/%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/">无重复字符的最长子串</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。</p>
-<p>示例 1:</p>
-<p>输入: “abcabcbb”<br>输出: 3<br>解释: 因为无重复字符的最长子串是 “abc”，所以其长度为 3。<br>示例 2:</p>
-<p>输入: “bbbbb”<br>输出: 1<br>解释: 因为无重复字符的最长子串是 “b”，所以其长度为 1。<br>示例 3:</p>
-<p>输入: “pwwkew”<br>输出: 3<br>解释: 因为无重复字符的最长子串是 “wke”，所以其长度为 3。<br>     请注意，你的答案必须是 子串 的长度，”pwke” 是一个子序列，不是子串。</p>
-        
-          <p class="article-more-link">
-            <a href="/2020/07/15/%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/15/%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" data-id="ckcw4h6vt000dosuu0l5w3ro8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/15/%E5%9B%9E%E6%96%87%E6%95%B0/" data-id="ckcyzookl000bbouu4vefaajn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -865,6 +865,10 @@
       <ul>
         
           <li>
+            <a href="/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/">JVM指令与工具</a>
+          </li>
+        
+          <li>
             <a href="/2020/07/20/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">java学习笔记</a>
           </li>
         
@@ -878,10 +882,6 @@
         
           <li>
             <a href="/2020/07/18/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8/">合并两个有序列表</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/17/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/">有效的括号</a>
           </li>
         
       </ul>

@@ -5,17 +5,21 @@
   
 
   
-  <title>categories | Haodadeyu</title>
+  <title>JVM指令与工具 | Haodadeyu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+  <meta name="description" content="jps用于显示当前机器中运行的JAVA程序的进程号。 jconsole随JDK安装的可视化调优工具，详细信息包括内存使用情况、正在运行的线程和已装入类。该数据将帮助监控应用程序和 JVM 的行为。该信息有助于了解性能问题、内存使用问题、挂起或死锁。 jstat jstack查看线程，分析死锁。 jmap查看内存，dump并导出 visualvm可视化工具，可以分析jmap dump的内容，在lin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM指令与工具">
+<meta property="og:url" content="http://yoursite.com/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/index.html">
 <meta property="og:site_name" content="Haodadeyu">
+<meta property="og:description" content="jps用于显示当前机器中运行的JAVA程序的进程号。 jconsole随JDK安装的可视化调优工具，详细信息包括内存使用情况、正在运行的线程和已装入类。该数据将帮助监控应用程序和 JVM 的行为。该信息有助于了解性能问题、内存使用问题、挂起或死锁。 jstat jstack查看线程，分析死锁。 jmap查看内存，dump并导出 visualvm可视化工具，可以分析jmap dump的内容，在lin">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-12T13:38:51.000Z">
-<meta property="article:modified_time" content="2020-07-12T13:39:39.486Z">
+<meta property="og:image" content="http://yoursite.com/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/%E5%9B%BE%E7%89%871.png">
+<meta property="article:published_time" content="2020-07-23T15:26:32.000Z">
+<meta property="article:modified_time" content="2020-07-23T16:07:13.501Z">
 <meta property="article:author" content="Haodadeyu">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/%E5%9B%BE%E7%89%871.png">
   
     <link rel="alternate" href="/atom.xml" title="Haodadeyu" type="application/atom+xml">
   
@@ -64,12 +68,16 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-JVM指令与工具" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/categories/index.html" class="article-date">
-  <time datetime="2020-07-12T13:38:51.000Z" itemprop="datePublished">2020-07-12</time>
+    <a href="/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/" class="article-date">
+  <time datetime="2020-07-23T15:26:32.000Z" itemprop="datePublished">2020-07-23</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -78,7 +86,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      categories
+      JVM指令与工具
     </h1>
   
 
@@ -86,17 +94,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h2><p>用于显示当前机器中运行的JAVA程序的进程号。</p>
+<h2 id="jconsole"><a href="#jconsole" class="headerlink" title="jconsole"></a>jconsole</h2><p>随JDK安装的可视化调优工具，详细信息包括内存使用情况、正在运行的线程和已装入类。该数据将帮助监控应用程序和 JVM 的行为。该信息有助于了解性能问题、内存使用问题、挂起或死锁。</p>
+<h2 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a>jstat</h2><p><img src="/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/%E5%9B%BE%E7%89%871.png" alt="图片1"></p>
+<h2 id="jstack"><a href="#jstack" class="headerlink" title="jstack"></a>jstack</h2><p>查看线程，分析死锁。</p>
+<h2 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a>jmap</h2><p>查看内存，dump并导出</p>
+<h2 id="visualvm"><a href="#visualvm" class="headerlink" title="visualvm"></a>visualvm</h2><p>可视化工具，可以分析jmap dump的内容，在linux环境中一般没有GUI界面，因此可以用jmap将内存信息dump下来然后在其它平台下使用visualvm分析。<br>旧版本JDK中继承了该工具，新版本（1.8后）中已经移除，需要另行下载。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/categories/index.html" data-id="ckcyzoolk0015bouu2fc46mz6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/" data-id="ckcyzookb0004bouu479ra95j" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
     
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/20/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">java学习笔记</div>
+    </a>
+  
+</nav>
+
   
 </article>
 
