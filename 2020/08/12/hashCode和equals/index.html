@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>hashCode和equals | Haodadeyu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="equals方法与&#x3D;&#x3D;对于基本数据类型，&#x3D;&#x3D;比较的总是两个值是否一样，而对于对象，&#x3D;&#x3D;比较的是两个对象在内存中的地址是否一样，即它们是否为同一个对象。 对于含有方法的对象中的equlas方法在没有进行重写*的情况下，与*&#x3D;&#x3D;完全一致，即比较的是两个对象的地址。 不过比较常用的String对象的equals方法就被进行了重写，用于判断两个String对象的内容是否一样。 所以 1234Strin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hashCode和equals">
+<meta property="og:url" content="http://yoursite.com/2020/08/12/hashCode%E5%92%8Cequals/index.html">
+<meta property="og:site_name" content="Haodadeyu">
+<meta property="og:description" content="equals方法与&#x3D;&#x3D;对于基本数据类型，&#x3D;&#x3D;比较的总是两个值是否一样，而对于对象，&#x3D;&#x3D;比较的是两个对象在内存中的地址是否一样，即它们是否为同一个对象。 对于含有方法的对象中的equlas方法在没有进行重写*的情况下，与*&#x3D;&#x3D;完全一致，即比较的是两个对象的地址。 不过比较常用的String对象的equals方法就被进行了重写，用于判断两个String对象的内容是否一样。 所以 1234Strin">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-12T13:47:34.000Z">
+<meta property="article:modified_time" content="2020-08-12T14:53:05.050Z">
+<meta property="article:author" content="Haodadeyu">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Haodadeyu" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Haodadeyu</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hashCode和equals" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/12/hashCode%E5%92%8Cequals/" class="article-date">
+  <time datetime="2020-08-12T13:47:34.000Z" itemprop="datePublished">2020-08-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hashCode和equals
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+
+<h2 id="equals方法与"><a href="#equals方法与" class="headerlink" title="equals方法与=="></a>equals方法与==</h2><p>对于基本数据类型，<strong><em>==</em></strong>比较的总是两个值是否一样，而对于对象，<strong><em>==</em></strong>比较的是两个对象在内存中的地址是否一样，即它们是否为同一个对象。</p>
+<p>对于含有方法的对象中的equlas方法在<strong><em>没有进行重写*</em></strong>的情况下，与<strong>*==</strong>完全一致，即比较的是两个对象的地址。</p>
+<p>不过比较常用的String对象的equals方法就被进行了重写，用于判断两个String对象的<strong><em>内容</em></strong>是否一样。</p>
+<p>所以</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String a=<span class="string">"abc"</span>;</span><br><span class="line">String b=<span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br><span class="line">System.out.println(<span class="string">"a == b:  "</span> + (a == b));</span><br><span class="line">System.out.println(<span class="string">"a equals b:  "</span>+ (a.equals(b)));</span><br></pre></td></tr></table></figure>
+
+<p>打印出来分别是<strong>FALSE</strong>跟<strong>TRUE</strong></p>
+<p>注意：这里的b如果是直接申明而不是new出来的，那么a==b的返回值也是TRUE，这是因为JVM中的String对象缓存机制，JVM在创建b时会先到缓存里面查找是否有这样一个字符串，如果有，就直接拿到这个字符串的地址。</p>
+<p>类似的，Integer对象也存在缓存的机制，但是只会去缓存值在-128~127之间的对象。</p>
+<p>所以</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Integer a=<span class="number">127</span>;</span><br><span class="line">Integer b=<span class="number">127</span>;</span><br><span class="line">Integer c=<span class="number">128</span>;</span><br><span class="line">Integer d=<span class="number">128</span>;</span><br><span class="line">System.out.println(<span class="string">"a == b:"</span> + (a == b));  </span><br><span class="line">System.out.println(<span class="string">"c == d:"</span> + (c == d));</span><br></pre></td></tr></table></figure>
+
+<p>打印出来分别是<strong>TRUE</strong>跟<strong>FALSE</strong></p>
+<p>注意：</p>
+<p>1、无论是直接申明还是new出来的，只要不在-128~127之间，那么两个Integer对象的==返回值都是FALSE，这一点区别于String的缓存机制，Integer只会缓存在这个范围内的对象，其它范围的都是再new一个。</p>
+<p>2、在Integer跟int进行==比较时，Integer会自动拆箱，最终比较的还是两个int之间的值，与对象无关。</p>
+<h2 id="equals方法与hashCode"><a href="#equals方法与hashCode" class="headerlink" title="equals方法与hashCode"></a>equals方法与hashCode</h2><p>hashcode也是可以被重写的，所以实际上它与equals方法没有必然的关系，但是这样子就失去了它存在的意义了，所以我们人为规定了它的使用场景。</p>
+<p>在默认情况下，它返回的是这个对象根据一个散列函数计算出来的散列值。对于同一个对象，不管进行多少次hashCode方法，返回值都应该是一致的。根据散列函数的特性，散列值一样的对象不一定是同一个对象，而同一个对象的散列值一定相等。</p>
+<p>这个散列值在两个对象进行比较时可以更快的帮助我们锁定其位置，对于JAVA中的集合set，它是不允许存在两个一样的值的，我们每次添加新元素进去的时候，都要检查这个元素是否已经出现过了，假如这个集合中已经存在了非常多的元素，就只能一个个去使用equals方法进行比较，效率十分低下，而hashCode就像是把这个集合分为一个个桶，每个元素都有一个桶号，在我们对两个元素进行equlas方法比较时，它会先计算这个两个元素的hashCode，假如不一样，就直接插入到对应的位置，假如它们的hashCode一样，再进行equals方法，这样子就能大大减少equals方法的调用次数。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>1、如果两个对象equals，Java运行时环境会认为他们的hashcode一定相等。<br>2、如果两个对象不equals，他们的hashcode有可能相等。<br>3、如果两个对象hashcode相等，他们不一定equals。<br>4、如果两个对象hashcode不相等，他们一定不equals。 </p>
+<p>关于这两个方法的重要规范： </p>
+<p>规范1：若重写equals(Object obj)方法，有必要重写hashcode()方法，确保通过equals(Object obj)方法判断结果为true的两个对象具备相等的hashcode()返回值。说得简单点就是：“如果两个对象相同，那么他们的hashcode应该相等”。不过请注意：这个只是规范，如果你非要写一个类让equals(Object obj)返回true而hashcode()返回两个不相等的值，编译和运行都是不会报错的。不过这样违反了Java规范，程序也就埋下了BUG。 </p>
+<p>规范2：如果equals(Object obj)返回false，即两个对象“不相同”，并不要求对这两个对象调用hashcode()方法得到两个不相同的数。说的简单点就是：“如果两个对象不相同，他们的hashcode可能相同”。 </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/08/12/hashCode%E5%92%8Cequals/" data-id="ckdvae9pz000624uudylletyg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JVM指令与工具</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/LeetCode/">LeetCode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/12/hashCode%E5%92%8Cequals/">hashCode和equals</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/">JVM指令与工具</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/20/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">java学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/18/%E5%AE%9E%E7%8E%B0strStr/">实现strStr()</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/18/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/">移除元素</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Haodadeyu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

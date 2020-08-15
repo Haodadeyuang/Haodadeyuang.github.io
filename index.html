@@ -64,6 +64,71 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hashCode和equals" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/12/hashCode%E5%92%8Cequals/" class="article-date">
+  <time datetime="2020-08-12T13:47:34.000Z" itemprop="datePublished">2020-08-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/12/hashCode%E5%92%8Cequals/">hashCode和equals</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+
+<h2 id="equals方法与"><a href="#equals方法与" class="headerlink" title="equals方法与=="></a>equals方法与==</h2><p>对于基本数据类型，<strong><em>==</em></strong>比较的总是两个值是否一样，而对于对象，<strong><em>==</em></strong>比较的是两个对象在内存中的地址是否一样，即它们是否为同一个对象。</p>
+<p>对于含有方法的对象中的equlas方法在<strong><em>没有进行重写*</em></strong>的情况下，与<strong>*==</strong>完全一致，即比较的是两个对象的地址。</p>
+<p>不过比较常用的String对象的equals方法就被进行了重写，用于判断两个String对象的<strong><em>内容</em></strong>是否一样。</p>
+<p>所以</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String a=<span class="string">"abc"</span>;</span><br><span class="line">String b=<span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br><span class="line">System.out.println(<span class="string">"a == b:  "</span> + (a == b));</span><br><span class="line">System.out.println(<span class="string">"a equals b:  "</span>+ (a.equals(b)));</span><br></pre></td></tr></table></figure>
+
+<p>打印出来分别是<strong>FALSE</strong>跟<strong>TRUE</strong></p>
+<p>注意：这里的b如果是直接申明而不是new出来的，那么a==b的返回值也是TRUE，这是因为JVM中的String对象缓存机制，JVM在创建b时会先到缓存里面查找是否有这样一个字符串，如果有，就直接拿到这个字符串的地址。</p>
+<p>类似的，Integer对象也存在缓存的机制，但是只会去缓存值在-128~127之间的对象。</p>
+<p>所以</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Integer a=<span class="number">127</span>;</span><br><span class="line">Integer b=<span class="number">127</span>;</span><br><span class="line">Integer c=<span class="number">128</span>;</span><br><span class="line">Integer d=<span class="number">128</span>;</span><br><span class="line">System.out.println(<span class="string">"a == b:"</span> + (a == b));  </span><br><span class="line">System.out.println(<span class="string">"c == d:"</span> + (c == d));</span><br></pre></td></tr></table></figure>
+
+<p>打印出来分别是<strong>TRUE</strong>跟<strong>FALSE</strong></p>
+<p>注意：</p>
+<p>1、无论是直接申明还是new出来的，只要不在-128~127之间，那么两个Integer对象的==返回值都是FALSE，这一点区别于String的缓存机制，Integer只会缓存在这个范围内的对象，其它范围的都是再new一个。</p>
+<p>2、在Integer跟int进行==比较时，Integer会自动拆箱，最终比较的还是两个int之间的值，与对象无关。</p>
+<h2 id="equals方法与hashCode"><a href="#equals方法与hashCode" class="headerlink" title="equals方法与hashCode"></a>equals方法与hashCode</h2><p>hashcode也是可以被重写的，所以实际上它与equals方法没有必然的关系，但是这样子就失去了它存在的意义了，所以我们人为规定了它的使用场景。</p>
+<p>在默认情况下，它返回的是这个对象根据一个散列函数计算出来的散列值。对于同一个对象，不管进行多少次hashCode方法，返回值都应该是一致的。根据散列函数的特性，散列值一样的对象不一定是同一个对象，而同一个对象的散列值一定相等。</p>
+<p>这个散列值在两个对象进行比较时可以更快的帮助我们锁定其位置，对于JAVA中的集合set，它是不允许存在两个一样的值的，我们每次添加新元素进去的时候，都要检查这个元素是否已经出现过了，假如这个集合中已经存在了非常多的元素，就只能一个个去使用equals方法进行比较，效率十分低下，而hashCode就像是把这个集合分为一个个桶，每个元素都有一个桶号，在我们对两个元素进行equlas方法比较时，它会先计算这个两个元素的hashCode，假如不一样，就直接插入到对应的位置，假如它们的hashCode一样，再进行equals方法，这样子就能大大减少equals方法的调用次数。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>1、如果两个对象equals，Java运行时环境会认为他们的hashcode一定相等。<br>2、如果两个对象不equals，他们的hashcode有可能相等。<br>3、如果两个对象hashcode相等，他们不一定equals。<br>4、如果两个对象hashcode不相等，他们一定不equals。 </p>
+<p>关于这两个方法的重要规范： </p>
+<p>规范1：若重写equals(Object obj)方法，有必要重写hashcode()方法，确保通过equals(Object obj)方法判断结果为true的两个对象具备相等的hashcode()返回值。说得简单点就是：“如果两个对象相同，那么他们的hashcode应该相等”。不过请注意：这个只是规范，如果你非要写一个类让equals(Object obj)返回true而hashcode()返回两个不相等的值，编译和运行都是不会报错的。不过这样违反了Java规范，程序也就埋下了BUG。 </p>
+<p>规范2：如果equals(Object obj)返回false，即两个对象“不相同”，并不要求对这两个对象调用hashcode()方法得到两个不相同的数。说的简单点就是：“如果两个对象不相同，他们的hashcode可能相同”。 </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/08/12/hashCode%E5%92%8Cequals/" data-id="ckdvae9pz000624uudylletyg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-JVM指令与工具" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/" class="article-date">
@@ -90,7 +155,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h2><p>用于显示当前机器中运行的JAVA程序的进程号。</p>
+        <a id="more"></a>
+
+<h2 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h2><p>用于显示当前机器中运行的JAVA程序的进程号。</p>
 <h2 id="jconsole"><a href="#jconsole" class="headerlink" title="jconsole"></a>jconsole</h2><p>随JDK安装的可视化调优工具，详细信息包括内存使用情况、正在运行的线程和已装入类。该数据将帮助监控应用程序和 JVM 的行为。该信息有助于了解性能问题、内存使用问题、挂起或死锁。</p>
 <h2 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a>jstat</h2><p><img src="/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/%E5%9B%BE%E7%89%871.png" alt="图片1"></p>
 <h2 id="jstack"><a href="#jstack" class="headerlink" title="jstack"></a>jstack</h2><p>查看线程，分析死锁。</p>
@@ -100,7 +167,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/" data-id="ckcyzookb0004bouu479ra95j" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/" data-id="ckdvae9pc000024uu3h1d96g3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -410,7 +477,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/20/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="ckcyzookg0007bouu8oyn9g4m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/20/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="ckdvae9q3000824uug6dq27cv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -461,7 +528,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/18/%E5%AE%9E%E7%8E%B0strStr/" data-id="ckcyzooko000gbouu65j07gh3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/18/%E5%AE%9E%E7%8E%B0strStr/" data-id="ckdvae9qe000m24uuev8wbhru" class="article-share-link">Share</a>
       
       
     </footer>
@@ -522,7 +589,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/18/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/" data-id="ckcyzool1000ubouu3g90986m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/18/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/" data-id="ckdvae9qk000v24uu3ksvckw6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -569,7 +636,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/18/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8/" data-id="ckcyzookh0008bouu4lk8ba8g" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/18/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8/" data-id="ckdvae9q8000e24uuerf37fnq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -622,7 +689,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/17/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" data-id="ckcyzooky000pbouu0axs5glz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/17/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" data-id="ckdvae9qj000t24uu2p4615ae" class="article-share-link">Share</a>
       
       
     </footer>
@@ -672,7 +739,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/17/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/" data-id="ckcyzookz000rbouucmnpeuw8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/17/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/" data-id="ckdvae9qm000z24uu9lun8k9a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -717,7 +784,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/16/HTTPS%E5%8D%8F%E8%AE%AE/" data-id="ckcyzook50001bouugnhv7814" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/16/HTTPS%E5%8D%8F%E8%AE%AE/" data-id="ckdvae9pu000424uu4tw12eb1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -763,56 +830,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/16/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/" data-id="ckcyzool2000wbouuf4s44hb3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-回文数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/07/15/%E5%9B%9E%E6%96%87%E6%95%B0/" class="article-date">
-  <time datetime="2020-07-15T08:32:28.000Z" itemprop="datePublished">2020-07-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/15/%E5%9B%9E%E6%96%87%E6%95%B0/">回文数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
-<p>示例 1:</p>
-<p>输入: 121<br>输出: true<br>示例 2:</p>
-<p>输入: -121<br>输出: false<br>解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。<br>示例 3:</p>
-<p>输入: 10<br>输出: false<br>解释: 从右向左读, 为 01 。因此它不是一个回文数。</p>
-        
-          <p class="article-more-link">
-            <a href="/2020/07/15/%E5%9B%9E%E6%96%87%E6%95%B0/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/15/%E5%9B%9E%E6%96%87%E6%95%B0/" data-id="ckcyzookl000bbouu4vefaajn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/16/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/" data-id="ckdvae9ql000x24uucm170bov" class="article-share-link">Share</a>
       
       
     </footer>
@@ -852,7 +870,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
     </div>
   </div>
 
@@ -863,6 +881,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/08/12/hashCode%E5%92%8Cequals/">hashCode和equals</a>
+          </li>
         
           <li>
             <a href="/2020/07/23/JVM%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7/">JVM指令与工具</a>
@@ -878,10 +900,6 @@
         
           <li>
             <a href="/2020/07/18/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/">移除元素</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/18/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8/">合并两个有序列表</a>
           </li>
         
       </ul>
