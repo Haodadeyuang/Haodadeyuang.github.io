@@ -5,11 +5,11 @@
   
 
   
-  <title>Archives: 2020/8 | Haodadeyu</title>
+  <title>Haodadeyu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Haodadeyu">
-<meta property="og:url" content="http://yoursite.com/archives/2020/08/index.html">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
 <meta property="og:site_name" content="Haodadeyu">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Haodadeyu">
@@ -64,38 +64,102 @@
       <div class="outer">
         <section id="main">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/08/12/hashCode%E5%92%8Cequals/" class="archive-article-date">
-  <time datetime="2020-08-12T13:47:34.000Z" itemprop="datePublished">Aug 12</time>
+    <article id="post-GC机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/11/GC%E6%9C%BA%E5%88%B6/" class="article-date">
+  <time datetime="2020-07-11T13:51:00.000Z" itemprop="datePublished">2020-07-11</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/12/hashCode%E5%92%8Cequals/">hashCode和equals</a>
+      <a class="article-title" href="/2020/07/11/GC%E6%9C%BA%E5%88%B6/">GC机制</a>
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="GCroot"><a href="#GCroot" class="headerlink" title="GCroot"></a>GCroot</h2><p>在程序的运行过程中，堆区内会不断被新的内容填充，保证堆区不溢出需要及时清理掉不需要的内容，如何判断哪些对象是可以清理的，哪些是不可以清理的呢？GC引入了<strong>GCroot</strong>这个概念，它包含了当前<strong>栈区、本地方法栈、方法区</strong>的内容，以这些内容为根节点，若其它内容直接或者间接地引用了GCroot的内容，例如方法区的全局变量等，那它就是不可被删除的。</p>
+        
+          <p class="article-more-link">
+            <a href="/2020/07/11/GC%E6%9C%BA%E5%88%B6/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/11/GC%E6%9C%BA%E5%88%B6/" data-id="ckfyuu08n0002ykuub93d0wtx" class="article-share-link">Share</a>
+      
+      
+    </footer>
   </div>
+  
 </article>
+
+
   
+    <article id="post-JVM内存模型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/11/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" class="article-date">
+  <time datetime="2020-07-11T13:50:45.000Z" itemprop="datePublished">2020-07-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    </div></section>
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/11/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">JVM内存模型</a>
+    </h1>
   
 
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Java按照逻辑关系将内存划分为5个区：<strong><em>堆、JVM栈、本地方法栈、程序计数器、方法区（元空间）</em></strong></p>
+        
+          <p class="article-more-link">
+            <a href="/2020/07/11/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/11/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" data-id="ckfyuu0950009ykuu6nmkh927" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 
 </section>
         
